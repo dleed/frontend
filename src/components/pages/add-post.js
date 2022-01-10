@@ -7,6 +7,7 @@ export default class AddPost extends Component {
         this.state = {
             titleInput: "",
             priceInput: 0.0,
+            imgInput:"",
             loading: false,
             error: false
         }
@@ -16,7 +17,7 @@ export default class AddPost extends Component {
     }
 
     handleChange(event) {
-        this.setState({ [event.target.title]: event.target.value })
+        this.setState({ [event.target.name]: event.target.value })
     }
 
     handleSubmit(event) {
@@ -27,54 +28,63 @@ export default class AddPost extends Component {
             error: false
         })
 
-        fetch("https://enigmatic-gorge-74194.herokuapp.com/post/add", {
+        fetch("https://backend-devaughn.herokuapp.com/post/add", {
             method: "POST",
             headers: { "content-type": "application/json" },
             body: JSON.stringify({
                 title: this.state.titleInput,
-                price: parseFloat(this.state.priceInput)
+                price: parseFloat(this.state.priceInput),
+                img:this.state.imgInput
             })
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.id) {
-                this.props.history.push("/posts")
-            }
-        })
-        .catch(error => {
-            console.log("Error adding post ", error)
+            .then(response => response.json())
+            .then(data => {
+                if (data.id) {
+                    this.props.history.push("/posts")
+                }
+            })
+            .catch(error => {
+                console.log("Error adding post ", error)
 
-            this.setState({
-                loading: false,
-                error: true
+                this.setState({
+                    loading: false,
+                    error: true
+                })
             })
-        })
     }
 
     render() {
         return (
             <div className='add-post-wrapper'>
-                <h2>Add Post</h2>
+                <h2>Add Product</h2>
 
                 <form onSubmit={this.handleSubmit}>
-                    <input 
-                        type="text" 
+                    <input
+                        type="text"
                         placeholder="title"
-                        name="titleInput" 
-                        //value={this.state.titleInput}
+                        name="titleInput"
+                        value={this.state.titleInput}
                         onChange={this.handleChange}
                     />
 
-                    <input 
-                        type="number" 
+                    <input
+                        type="number"
                         step="0.01"
                         placeholder="price"
-                        name="priceInput" 
-                        //value={this.state.priceInput}
+                        name="priceInput"
+                        value={this.state.priceInput}
                         onChange={this.handleChange}
                     />
 
-                    <button type="submit" disabled={this.state.loading}>Add Post</button>
+                    <input
+                        type="text"
+                        placeholder="img URL"
+                        name="imgInput"
+                        value={this.state.imgInput}
+                        onChange={this.handleChange}
+                    />
+
+                    <button type="submit" disabled={this.state.loading}>Add Product</button>
                 </form>
 
                 {this.state.loading ? <div className="loading">Submitting...</div> : null}

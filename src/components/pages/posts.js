@@ -12,7 +12,7 @@ export default class Posts extends Component {
     }
 
     componentDidMount() {
-        fetch("https://enigmatic-gorge-74194.herokuapp.com/post/get")
+        fetch("https://backend-devaughn.herokuapp.com/post/get")
         .then(response => response.json())
         .then(data => {
             this.setState({
@@ -33,6 +33,7 @@ export default class Posts extends Component {
         const postsHtml = this.state.posts.map(post => (
             <div className="post-wrapper" key={post.id}>
                 <h3>{post.title}</h3>
+                <img className="img-post" src={post.img}/>
                 <p>${post.price.toFixed(2)}</p>
             </div>
         ))
@@ -44,7 +45,7 @@ export default class Posts extends Component {
         if (this.state.loading) {
             return (
                 <div className='posts-page-wrapper'>
-                    <h2>Posts</h2>
+                    <h2>Products</h2>
                     <div className='posts-wrapper'>
                         <div className="loading">Loading...</div>
                     </div>
@@ -55,7 +56,7 @@ export default class Posts extends Component {
         else if (this.state.error) {
             return (
                 <div className='posts-page-wrapper'>
-                    <h2>Posts</h2>
+                    <h2>Products</h2>
                     <div className='posts-wrapper'>
                         <div className="error">An error occured... Please try again later.</div>
                     </div>
@@ -66,7 +67,7 @@ export default class Posts extends Component {
         else {
             return (
                 <div className='posts-page-wrapper'>
-                    <h2>Posts</h2>
+                    <h2>Products</h2>
                     <div className="posts-wrapper">
                         {this.renderPosts()}
                     </div>

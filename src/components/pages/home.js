@@ -6,9 +6,12 @@ export default function Home() {
         <div className='home-wrapper'>
             <h1>Welcome to my store!</h1>
             <div className="home-buttons-wrapper">
-                <Link to="/posts">See all my posts</Link>
-                <Link to="/add-post">Add a post</Link>
+                <Link to="/posts">See all products</Link>
+                <Link to="/add-post">Add a product</Link>
             </div>
         </div>
+        
     )
+    
 }
+

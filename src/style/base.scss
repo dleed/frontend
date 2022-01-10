@@ -8,7 +8,7 @@ body {
 }
 
 a {
-    color: black;
+    color: red;
     text-decoration: none;
 }
 
@@ -18,7 +18,7 @@ a {
     flex-direction: column;
     align-items: center;
     min-height: 100vh;
-    background-color: aliceblue;
+    background-color: black;
 }
 
 .loading, .error {
